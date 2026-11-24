@@ -1,0 +1,37 @@
+version: 2
+models:
+  - name: stg_customers
+    description: Clean customer names and uppercase country codes.
+    columns:
+      - name: customer_id
+        data_tests: [not_null, unique]
+  - name: stg_products
+    description: Clean product labels and standardise decimal prices.
+    columns:
+      - name: product_id
+        data_tests: [not_null, unique]
+  - name: stg_orders
+    description: Typed order fields and normalised status values.
+    columns:
+      - name: order_id
+        data_tests: [not_null, unique]
+      - name: customer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_customers')
+                field: customer_id
+      - name: product_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_products')
+                field: product_id
+      - name: order_status
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [completed, pending, cancelled]

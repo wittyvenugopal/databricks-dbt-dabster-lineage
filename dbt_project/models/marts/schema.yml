@@ -1,0 +1,17 @@
+version: 2
+models:
+  - name: fct_sales
+    description: One row per completed order.
+    columns:
+      - name: order_id
+        data_tests: [not_null, unique]
+  - name: dim_customers
+    description: One row per customer, including customers with no completed orders.
+    columns:
+      - name: customer_id
+        data_tests: [not_null, unique]
+  - name: daily_revenue
+    description: Completed order counts and revenue by order date.
+    columns:
+      - name: order_date
+        data_tests: [not_null, unique]

@@ -1,0 +1,44 @@
+version: 2
+models:
+  - name: stg_customers
+    description: Cleaned customer identifiers, names and countries.
+    columns:
+      - name: customer_id
+        data_tests: [not_null, unique]
+  - name: stg_quotes
+    description: One row per quote with its customer, coverage and quoted premium.
+    columns:
+      - name: quote_id
+        data_tests: [not_null, unique]
+      - name: customer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_customers')
+                field: customer_id
+  - name: stg_policies
+    description: One row per issued policy with typed dates and bound premium.
+    columns:
+      - name: policy_id
+        data_tests: [not_null, unique]
+      - name: customer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_customers')
+                field: customer_id
+      - name: quote_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_quotes')
+                field: quote_id
+      - name: policy_status
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [active, cancelled]

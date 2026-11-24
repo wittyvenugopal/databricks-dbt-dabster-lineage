@@ -1,0 +1,20 @@
+name: policy_lineage_pilot
+version: '1.0.0'
+config-version: 2
+profile: policy_lineage_pilot
+
+models:
+  policy_lineage_pilot:
+    staging:
+      +materialized: view
+    marts:
+      +materialized: table
+
+seeds:
+  policy_lineage_pilot:
+    raw_quotes:
+      +column_types:
+        quoted_premium: decimal(12,2)
+    raw_policies:
+      +column_types:
+        annual_premium: decimal(12,2)

@@ -1,0 +1,5 @@
+policy_id,customer_id,quote_id,effective_date,policy_status,annual_premium
+301,101,201,2026-01-01,Active,420.00
+302,101,202,2026-01-15,Active,245.00
+303,102,203,2026-02-01,Cancelled,575.50
+304,103,204,2026-02-15,Active,310.00

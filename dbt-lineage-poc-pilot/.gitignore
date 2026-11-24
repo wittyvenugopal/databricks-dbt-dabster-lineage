@@ -1,0 +1,11 @@
+.env
+.venv/
+.uv-cache/
+.uv-python/
+.dagster/
+__pycache__/
+profiles.yml
+target/
+dbt_packages/
+logs/
+.user.yml

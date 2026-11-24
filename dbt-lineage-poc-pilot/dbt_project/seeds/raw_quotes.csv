@@ -1,0 +1,6 @@
+quote_id,customer_id,cover_type,currency,quoted_premium
+201,101,Motor,GBP,420.00
+202,101,Home,GBP,250.00
+203,102,Motor,GBP,575.50
+204,103,Home,EUR,310.00
+205,103,Motor,EUR,480.00

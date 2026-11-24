@@ -1,0 +1,9 @@
+version: 2
+models:
+  - name: fct_policy
+    description: One row per issued policy with its customer, originating quote and annual premium.
+    columns:
+      - name: policy_id
+        data_tests: [not_null, unique]
+      - name: annual_premium
+        data_tests: [not_null]

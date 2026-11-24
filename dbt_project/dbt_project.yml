@@ -1,0 +1,28 @@
+name: retail_lineage_poc
+version: '1.0.0'
+config-version: 2
+profile: retail_lineage_poc
+
+model-paths: [models]
+seed-paths: [seeds]
+macro-paths: [macros]
+test-paths: [tests]
+clean-targets: [target, dbt_packages]
+
+models:
+  retail_lineage_poc:
+    staging:
+      +materialized: view
+    intermediate:
+      +materialized: ephemeral
+    marts:
+      +materialized: table
+
+seeds:
+  retail_lineage_poc:
+    raw_orders:
+      +column_types:
+        order_date: string
+    raw_products:
+      +column_types:
+        unit_price: decimal(10,2)

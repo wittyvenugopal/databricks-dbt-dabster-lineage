@@ -1,0 +1,4 @@
+version: 2
+models:
+  - name: int_order_details
+    description: One row per order with customer, product and gross sales amount. Inlined into downstream models.
