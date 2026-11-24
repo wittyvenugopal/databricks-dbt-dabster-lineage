@@ -5,15 +5,7 @@ One dbt Core project models fictional retail orders on an Azure Databricks SQL w
 Use an authenticated Databricks CLI profile and a Unity Catalog sandbox. Replace the workspace, warehouse and profile placeholders, and substitute your catalog for `sandbox_catalog`. Run only one builder at a time against the POC schema.
 
 
-```mermaid
-flowchart TD
-    A["1. Click Materialize in the Dagster UI"]
-    B["2. Local Dagster selects assets from manifest.json"]
-    C["3. dbt Core compiles model SQL and data test queries"]
-    D["4. Databricks SQL warehouse executes the queries"]
-    E["5. Unity Catalog stores the resulting tables and views"]
-    A --> B --> C --> D --> E
-```
+[![How Dagster starts dbt, Databricks executes SQL and Unity Catalog records lineage](docs/execution-flow.svg)](docs/execution-flow.svg)
 
 **Run results:** Databricks returns query results to dbt. dbt streams model and test events back to Dagster, where they appear as asset materializations and checks.
 
