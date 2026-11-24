@@ -6,21 +6,18 @@ Use an authenticated Databricks CLI profile and a Unity Catalog sandbox. Replace
 
 
 ```mermaid
-flowchart LR
-    M["dbt manifest.json"] --> D["dbt Docs"]
-    M -->|Loads asset dependencies| G["Local Dagster"]
-    U["Click Materialize in Dagster UI"] --> G
-    G -->|Launches dbt build for selected assets| B["dbt Core"]
-    J["Terminal or native Lakeflow dbt task"] -->|Alternative build trigger| B
-    B -->|Sends compiled SQL and test queries| W["Databricks SQL warehouse"]
-    W -->|Builds tables and views| C["Unity Catalog"]
-    W -.->|Returns query results| B
-    B -.->|Streams model and test events for Dagster runs| G
-    G --> E["Local asset graph, run history and checks"]
-    C --> L["Catalog Explorer runtime lineage"]
-    C --> V["Lakeflow Designer"]
-    V --> O["Separate Designer output table"]
+flowchart TD
+    A["1. Click Materialize in the Dagster UI"]
+    B["2. Local Dagster selects assets from manifest.json"]
+    C["3. dbt Core compiles model SQL and data test queries"]
+    D["4. Databricks SQL warehouse executes the queries"]
+    E["5. Unity Catalog stores the resulting tables and views"]
+    A --> B --> C --> D --> E
 ```
+
+**Run results:** Databricks returns query results to dbt. dbt streams model and test events back to Dagster, where they appear as asset materializations and checks.
+
+**Lineage and reuse:** dbt Docs renders the declared model graph from the manifest. Catalog Explorer displays the runtime lineage Databricks captures. Lakeflow Designer can read the built tables and write a separate output. Terminal dbt and a native Lakeflow dbt task can also launch the same dbt build.
 
 ## 1. Install and configure
 
