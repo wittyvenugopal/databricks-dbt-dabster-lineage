@@ -49,6 +49,12 @@ A parameterized reference successfully read a dbt-built view. A SQL preview with
 | Dagster failure | An invalid column in `stg_orders` failed the run. Independent branches materialized, and all three marts skipped. |
 | Dagster recovery | The original SQL materialized all nine assets and passed all 19 checks. |
 
+### Dagster asset lineage
+
+Dagster reads the dbt manifest to draw the asset graph. The three seed assets feed the staging views, and the staging views connect directly to the marts. The integration follows dependencies through the ephemeral `int_order_details` model without creating a materializable asset for it. The graph covers this dbt project. Catalog Explorer provides the separate Unity Catalog runtime lineage.
+
+![Dagster Global Asset Lineage showing the retail seeds, staging views, and marts](docs/screenshots/dagster-lineage.png)
+
 ## Reproduce the checks
 
 - [ ] Build the retail project and inspect dbt Docs.
