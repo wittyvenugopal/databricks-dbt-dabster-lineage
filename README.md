@@ -7,16 +7,19 @@ Use an authenticated Databricks CLI profile and a Unity Catalog sandbox. Replace
 
 ```mermaid
 flowchart LR
-    M[dbt manifest] --> D[dbt Docs]
-    M --> G[Local Dagster asset graph]
-    G --> B[dbt Core build]
-    J[Terminal or native Lakeflow dbt task] --> B
-    B --> W[Databricks SQL warehouse]
-    W --> U[Unity Catalog tables and views]
-    U --> L[Catalog Explorer lineage]
-    U --> V[Lakeflow Designer]
-    V --> O[Designer output table]
-    B -->|When launched by Dagster| E[Local run events and checks]
+    M["dbt manifest.json"] --> D["dbt Docs"]
+    M -->|Loads asset dependencies| G["Local Dagster"]
+    U["Click Materialize in Dagster UI"] --> G
+    G -->|Launches dbt build for selected assets| B["dbt Core"]
+    J["Terminal or native Lakeflow dbt task"] -->|Alternative build trigger| B
+    B -->|Sends compiled SQL and test queries| W["Databricks SQL warehouse"]
+    W -->|Builds tables and views| C["Unity Catalog"]
+    W -.->|Returns query results| B
+    B -.->|Streams model and test events for Dagster runs| G
+    G --> E["Local asset graph, run history and checks"]
+    C --> L["Catalog Explorer runtime lineage"]
+    C --> V["Lakeflow Designer"]
+    V --> O["Separate Designer output table"]
 ```
 
 ## 1. Install and configure
