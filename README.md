@@ -116,6 +116,7 @@ dagster dev -f orchestration/definitions.py
 ## 6. Designer, native Jobs and findings
 
 - [Lakeflow Designer walkthrough](docs/visual_data_prep.md)
+- [Generate and deploy a dbt-backed canvas to Dev and Stage](docs/designer-release-flow.md)
 - [Native Lakeflow Jobs walkthrough](docs/databricks_jobs.md)
 - [Validation checklist and findings](FINDINGS.md)
 

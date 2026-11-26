@@ -39,6 +39,8 @@ Designer read the dbt-built mart and wrote a separate table. The Lakeflow Job sh
 
 A parameterized reference successfully read a dbt-built view. A SQL preview with raw dbt `ref()` failed with an unresolved template expression. The documented import format is `.designer.ipynb`. Compiled SQL parity, macro evaluation and workspace import probes remain open.
 
+The policy and retail experiments also generated runnable canvases from real dbt manifests and compiled SQL. The policy output matched all four dbt rows, and the retail output matched all 12 rows while retaining the ephemeral CTE. Both Serverless job runs succeeded. [Release flow and evidence](docs/designer-release-flow.md#verified-results)
+
 ## Native dbt job and Dagster
 
 | Experiment | Verified result |

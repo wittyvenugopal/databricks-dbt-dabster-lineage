@@ -61,3 +61,9 @@ dagster dev -f orchestration/definitions.py --host 127.0.0.1 --port 3002
 ```
 
 Open **http://localhost:3002** → **Assets** to see the manifest-derived graph. Materialise `fct_policy` with its upstream assets to rebuild the pilot through Dagster. Check **Runs** and asset **Checks** for outcomes. The pilot keeps its run history in its own `.dagster` folder. Record observations in [FINDINGS.md](FINDINGS.md).
+
+## Explore the manifest without Dagster
+
+Import [policy_lineage_notebook.py](policy_lineage_notebook.py) as a Databricks source notebook and run it on Serverless. It displays a dependency-only snapshot from the policy manifest. To draw a different manifest, set the `manifest_path` widget to a readable workspace or Unity Catalog volume file.
+
+See the [Designer release flow](../docs/designer-release-flow.md) for the separate experiment that generates and runs a canvas from the compiled policy or retail SQL.
